@@ -24,7 +24,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 	
 );
-our $VERSION = '1.0';
+our $VERSION = '1.1';
 
 
 # Preloaded methods go here.
@@ -68,15 +68,15 @@ __END__
 
 =head1 NAME
 
-Net::FTPServer::XferLog - Perl extension for blah blah blah
+Net::FTPServer::XferLog - parse FTP server xfer logs.
 
 =head1 SYNOPSIS
 
 # XFERLOG file:
 
-Mon Oct  1 17:09:23 2001 0 127.0.0.1 2611 1774034 a _ o r tmbranno ftp 0 * c
-Mon Oct  1 17:09:27 2001 0 127.0.0.1 22 1774034 a _ o r tmbranno ftp 0 * c
-Mon Oct  1 17:09:31 2001 0 127.0.0.1 7276 p1774034_11i_zhs.zip a _ o r tmbranno ftp 0 * c
+ Mon Oct  1 17:09:23 2001 0 127.0.0.1 2611 1774034 a _ o r tmbranno ftp 0 * c
+ Mon Oct  1 17:09:27 2001 0 127.0.0.1 22 1774034 a _ o r tmbranno ftp 0 * c
+ Mon Oct  1 17:09:31 2001 0 127.0.0.1 7276 p1774034_11i_zhs.zip a _ o r tmbranno ftp 0 * c
 
 # parse xfer log PROGRAM:
 
