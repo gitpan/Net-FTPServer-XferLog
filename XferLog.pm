@@ -24,7 +24,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 	
 );
-our $VERSION = '1.1';
+our $VERSION = '1.2';
 
 
 # Preloaded methods go here.
@@ -85,9 +85,10 @@ Net::FTPServer::XferLog - parse FTP server xfer logs.
  my $hashref;
  while (<T>) {
    $hashref = Net::FTPServer::XferLog->parse_line($_);
+   map { print "$_ => $hashref->{$_} \n" } @Net::FTPServer::XferLog::field;
+   print "-------------------";
+
  }
- map { print "$_ => $hashref->{$_} \n" } @Net::FTPServer::XferLog::field;
- print "-------------------";
 
 # OUTPUT
 
@@ -166,6 +167,8 @@ None by default.
 =head1 AUTHOR
 
 T. M. Brannon <tbone@cpan.org>
+
+Thanks to Nic Heier for a doc fix.
 
 =head1 SEE ALSO
 
