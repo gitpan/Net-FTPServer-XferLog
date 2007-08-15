@@ -24,7 +24,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 	
 );
-our $VERSION = '1.2';
+our $VERSION = '1.3';
 
 
 # Preloaded methods go here.
@@ -42,19 +42,42 @@ my $day_name  = qr/\w{3}/;      my $month     = qr/\w{3}/;
     my $svc_name    = qr/ftp/;      my $auth_method = qr/(0|1)/;
     my $auth_userid = qr/([*]|\w+)/;my $status      = qr/(c|i)/;
 
-    our @field = qw(day_name month day current_time  year  transfer_time
-		   remote_host     file_size
-filename   transfer_type   special_action_flag    direction access_mode
-username   service_name    authentication_method  authenticated_user_id
-completion_status);
 
 
 sub parse_line {
     my $self = shift;   my $line = shift or die "must supply xferlog line";
 
+    my @field = qw(day_name month day current_time  year  transfer_time
+		   remote_host     file_size  filename   transfer_type   
+		   special_action_flag    direction access_mode username   
+		   service_name    authentication_method  authenticated_user_id
+		   completion_status);
 
     my %field;
-    @field{@field} = split /\s+/, $line;
+
+
+    my @tmp = split /\s+/, $line;
+    if (scalar @tmp == scalar @field) {
+	@field{@field} = @tmp;
+    } else {
+	for (@field) {
+	    last if $_ eq 'filename';
+	    $field{$_} = shift @tmp;
+	}
+		
+	@field = reverse @field;
+	@tmp   = reverse @tmp;
+
+	for (@field) {
+	    last if $_ eq 'filename';
+	    $field{$_} = shift @tmp;
+	}
+
+	@tmp = reverse @tmp ;
+	$field{filename} = "@tmp";
+    }
+
+
 
 #    map { print "$_ => $field{$_} \n" } @field;
 #    print "-------------------";
@@ -169,6 +192,8 @@ None by default.
 T. M. Brannon <tbone@cpan.org>
 
 Thanks to Nic Heier for a doc fix.
+Thanks to Mike Edwards for pointing out a bug when parsing files
+with spaces in their name.
 
 =head1 SEE ALSO
 
