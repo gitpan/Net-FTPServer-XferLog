@@ -24,7 +24,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 	
 );
-our $VERSION = '1.3';
+our $VERSION = '1.4';
 
 
 # Preloaded methods go here.
@@ -43,18 +43,19 @@ my $day_name  = qr/\w{3}/;      my $month     = qr/\w{3}/;
     my $auth_userid = qr/([*]|\w+)/;my $status      = qr/(c|i)/;
 
 
-
-sub parse_line {
-    my $self = shift;   my $line = shift or die "must supply xferlog line";
-
-    my @field = qw(day_name month day current_time  year  transfer_time
+our @field = qw(day_name month day current_time  year  transfer_time
 		   remote_host     file_size  filename   transfer_type   
 		   special_action_flag    direction access_mode username   
 		   service_name    authentication_method  authenticated_user_id
 		   completion_status);
 
+
+sub parse_line {
+    my $self = shift;   my $line = shift or die "must supply xferlog line";
+
     my %field;
 
+    my @field = @field;
 
     my @tmp = split /\s+/, $line;
     if (scalar @tmp == scalar @field) {
@@ -205,6 +206,10 @@ with spaces in their name.
 
 =item * wu-ftpd, proftpd. These FTP servers started this xferlog syntax,
 Net::FTPServer supports it.
+
+=item * slicker solutions to dealing with filenames with many spaces
+
+L<http://perlmonks.org/?node_id=632864>
 
 =back
 
