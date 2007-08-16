@@ -24,7 +24,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 	
 );
-our $VERSION = '1.4';
+our $VERSION = '1.5';
 
 
 # Preloaded methods go here.
@@ -192,9 +192,17 @@ None by default.
 
 T. M. Brannon <tbone@cpan.org>
 
-Thanks to Nic Heier for a doc fix.
-Thanks to Mike Edwards for pointing out a bug when parsing files
-with spaces in their name.
+Thanks to 
+
+=over 4 
+
+=item * Nic Heier for a doc fix.
+
+=item * Mike Edwards for pointing out a bug when parsing files with spaces in their name.
+
+=item * Zoltan Monori for pointing a bug in my code which parsed files with spaces in them the very next day!
+
+=back
 
 =head1 SEE ALSO
 
